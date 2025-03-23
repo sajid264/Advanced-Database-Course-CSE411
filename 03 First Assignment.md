@@ -72,3 +72,11 @@ CREATE TYPE Name_Type AS OBJECT (
 );
 
 Here we have created a custom data type called name type with three attributes. 
+
+### Creating Varrays (Variable sized arrays) in Oracle:
+To create a varray you have to use the following syntax:
+
+``CREATE TYPE Research_Interests_Varray AS VARRAY(10) OF VARCHAR2(100);`` 
+
+Here we are creating a we are a that has no more than 10 elements Each of which can Have 100 characters. 
+
