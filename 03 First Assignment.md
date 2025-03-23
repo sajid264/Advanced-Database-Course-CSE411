@@ -65,11 +65,7 @@ Using oracle OORDBMS features and documentations, perform the following:
 
 To define a custom type you have to use the CREATE TYPE keyword Followed by the name of the custom type and then AS OBJECT. After that you can add all the attributes with the respective data types.
 
-``REATE TYPE Name_Type AS OBJECT (
-    First_Name    VARCHAR2(50),
-    Middle_Name   VARCHAR2(50),
-    Last_Name     VARCHAR2(50)
-);``
+``CREATE TYPE Name_Type AS OBJECT (First_Name VARCHAR2(50), Middle_Name VARCHAR2(50), Last_Name VARCHAR2(50));``
 
 Here we have created a custom data type called name type with three attributes. 
 
@@ -80,3 +76,9 @@ To create a varray you have to use the following syntax:
 
 Here we are creating a we are a that has no more than 10 elements Each of which can Have 100 characters. 
 
+### Creating a nested table in Oracle: 
+To create a nested table use CREATE TYPE followed by the name of the nested table followed by AS TABLE OF followed by the custom type. 
+
+``CREATE TYPE Education_List AS TABLE OF Education_Type;``
+
+Here we are creating and nested table of the education type. 
