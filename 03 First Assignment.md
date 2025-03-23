@@ -9,8 +9,9 @@ to implement a database in an ORDBMS like Oracle,
 to insert sample data and run different queries on the database.
 ### Problem definition
 The following attributes describe a student in University Student Information System database:
+
 1. ID: Unique identifier for each entry.
-2. Name:
+2. Name: Type
     1. First Name
     2. Middle Name
     3. Last Name
@@ -18,7 +19,7 @@ The following attributes describe a student in University Student Information Sy
 4. CGPA
 5. Total Credits
 6. Department
-7. Address:
+7. Address: Type
     1. Present Address:
         1. House Number
         2. Street
@@ -31,16 +32,24 @@ The following attributes describe a student in University Student Information Sy
         4. District
 
 3. Mandatory Fields (Multi-valued):
-    1. Phone Number(s)
-    2. Email Address(es)
+    1. Phone Number(s) Varray
+    2. Email Address(es) Varray
 4. Optional Fields (Multi-valued):
-    1. Research Interests: Fields of research interest.
-    2. Programming Knowledge: Specify languages known (e.g., C, Java).
-    3. Educational Qualifications:Structure a record to store academic qualifications (degree,institution, and year of graduation).
+    1. Research Interests: Fields of research interest. Varray
+    2. Programming Knowledge: Specify languages known (e.g., C, Java). Varray
+    3. Educational Qualifications:Structure a record to store academic qualifications (Nested Type)
+        1. degree
+        2. institution
+        3. year of graduation.
 5. Family tree
-    1. Father and father of father
-    2. Mother and mother of mother
-A student can be player (game, score), organizer (club name, start date, end date).
+    1. Father 
+        1. father of father
+        2. Mother of father
+    2. Mother 
+        1. father of Mother
+        2. Mother of Mother
+6. Player (game, score) Nested 
+7. Organizer (club name, start date, end date). Nested
 
 
 ## Tasks:
