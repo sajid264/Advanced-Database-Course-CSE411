@@ -65,11 +65,11 @@ Using oracle OORDBMS features and documentations, perform the following:
 
 To define a custom type you have to use the CREATE TYPE keyword Followed by the name of the custom type and then AS OBJECT. After that you can add all the attributes with the respective data types.
 
-CREATE TYPE Name_Type AS OBJECT (
+``REATE TYPE Name_Type AS OBJECT (
     First_Name    VARCHAR2(50),
     Middle_Name   VARCHAR2(50),
     Last_Name     VARCHAR2(50)
-);
+);``
 
 Here we have created a custom data type called name type with three attributes. 
 
