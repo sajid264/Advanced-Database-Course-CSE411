@@ -54,7 +54,7 @@ The following attributes describe a student in University Student Information Sy
 
 ## Tasks:
 Using oracle OORDBMS features and documentations, perform the following:
-1. Define types and inheritance
+1. Define the custom types 
 2. Create tables using the types
 3. Insert sample data
 4. Write queries on the data
