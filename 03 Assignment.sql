@@ -96,6 +96,7 @@ CREATE TABLE Student (
 
 
 
+
 -- Student 1
 INSERT INTO Student VALUES (
     1, 
