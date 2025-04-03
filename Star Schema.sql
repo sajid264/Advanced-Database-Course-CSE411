@@ -46,7 +46,7 @@ CREATE TABLE customer_dimension (
 -- Time Dimension
 CREATE TABLE time_dimension (
     time_key NUMBER PRIMARY KEY,
-    date DATE,
+    date_value DATE,
     hour NUMBER,
     day NUMBER,
     week NUMBER,
