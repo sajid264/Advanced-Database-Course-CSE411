@@ -69,6 +69,8 @@ To define a custom type you have to use the CREATE TYPE keyword Followed by the 
 
 Here we have created a custom data type called name type with three attributes. 
 
+
+
 ### Creating Varrays (Variable sized arrays) in Oracle:
 To create a varray you have to use the following syntax:
 
