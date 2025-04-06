@@ -46,8 +46,8 @@ CREATE TABLE trans_dimension (
 );
 
 
-CREATE TABLE fact_payment (
-    payment_key VARCHAR2(10) PRIMARY KEY,
+CREATE TABLE fact_table (
+    fact_id VARCHAR2(10) PRIMARY KEY,
     coustomer_key VARCHAR2(10),
     time_key VARCHAR2(10),
     item_key VARCHAR2(10),
