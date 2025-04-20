@@ -1,8 +1,8 @@
-Welcome
+-- Welcome
 
 /*Step 01: Login to the database. 
 Open SQL Plus and enter the following command to connect top the database */
-/ as sysdba
+-- / as sysdba;
 
 select name from v$pdbs;
 
@@ -36,9 +36,6 @@ GRANT CREATE ANY PROCEDURE TO sofia;
 GRANT CREATE ANY TRIGGER TO sofia;
 GRANT CREATE TYPE TO sofia;
 
-
-
-
 GRANT CREATE SESSION TO app;
 GRANT CREATE TABLE TO app;
 GRANT CREATE PROCEDURE TO app;
@@ -51,5 +48,4 @@ GRANT CREATE ANY INDEX TO app;
 GRANT CREATE ANY SEQUENCE TO app;
 GRANT CREATE ANY PROCEDURE TO app;
 GRANT CREATE ANY TRIGGER TO app;
-
 GRANT CREATE TYPE TO app;
