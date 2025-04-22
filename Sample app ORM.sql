@@ -48,7 +48,7 @@ create OR REPLACE type customer_objtyp as object (
 create type LineItemList_ntabtyp as table of LineItem_objtyp;
 
 
-CREATE TYPE PurchaseOrder_objtyp AUTHID CURRENT_USER AS OBJECT (
+CREATE or replace TYPE PurchaseOrder_objtyp AUTHID CURRENT_USER AS OBJECT (
     PONo number,
     CustRef Ref Customer_objtyp,
     OrderDate date,
@@ -62,6 +62,7 @@ CREATE TYPE PurchaseOrder_objtyp AUTHID CURRENT_USER AS OBJECT (
     member FUNCTION
         sumLineItems RETURN NUMBER
     );
+/
 
 -- CREATE OR REPLACE TYPE BODY PURCHASEORDER_OBJTYP as
 --     map member function getPONo return number is 
@@ -75,3 +76,26 @@ CREATE TYPE PurchaseOrder_objtyp AUTHID CURRENT_USER AS OBJECT (
 --         Total NUMBER : = 0;
 
 --     begin
+
+CREATE OR REPLACE TYPE BODY PURCHASEORDER_OBJTYP AS
+    MAP MEMBER FUNCTION getPONo return number is 
+    BEGIN
+        RETURN PONO;
+    END;
+
+    MEMBER FUNCTION SUMLINEITEMS return number is
+
+    i integer;
+    StockVal StockItem_objtyp;
+    Total number:= 0;
+
+    begin
+        for i in 1..self.LineItemList_ntab.COUNT LOOP
+        UTL_REF.SELECT_OBJECT(LineItemList_ntab(i).Stock_ref, StockVal);
+        Total := Total+ self.LineItemList_ntab(i).Quantity * StockVal.Price;
+        end LOOP;
+        Return TOTAL;
+    END;
+END;
+/
+
