@@ -99,3 +99,18 @@ CREATE OR REPLACE TYPE BODY PURCHASEORDER_OBJTYP AS
 END;
 /
 
+
+CREATE OR REPLACE TYPE BODY customer_objtyp as
+ORDER MEMBER FUNCTION compareCustOrders (x IN Customer_objtyp) RETURN INTEGER IS
+    BEGIN
+        RETURN custNo - x.custNo;
+    END;
+end;
+/
+
+-- object definitions finished.
+
+-- Now to create the tables.
+
+CREATE TABLE Customer_objtab OF customer_objtyp (custNo primary key)
+    OBJECT IDENTIFIER IS PRIMARY KEY;
