@@ -46,7 +46,7 @@ create OR REPLACE type customer_objtyp as object (
 ) not final ;
 /
 create type LineItemList_ntabtyp as table of LineItem_objtyp;
-
+/
 
 CREATE or replace TYPE PurchaseOrder_objtyp AUTHID CURRENT_USER AS OBJECT (
     PONo number,
@@ -114,3 +114,19 @@ end;
 
 CREATE TABLE Customer_objtab OF customer_objtyp (custNo primary key)
     OBJECT IDENTIFIER IS PRIMARY KEY;
+
+CREATE TABLE Stock_objtab OF StockItem_objtyp (StockNo PRIMARY KEY)
+    OBJECT IDENTIFIER IS PRIMARY KEY;
+
+CREATE TABLE PurchaseOrder_objtab OF PurchaseOrder_objtyp 
+(PRIMARY KEY (PONo), FOREIGN KEY (Custref) REFERENCES Customer_objtyp)  
+OBJECT IDENTIFIER IS PRIMARY KEY
+NESTED TABLE LineItemList_ntab STORE AS PoLine_ntab (
+    (PRIMARY KEY (NESTED_TABLE_ID, LineItemNo))
+    ORGANIZATION INDEX COMPRESS)
+RETURN AS LOCATOR
+/
+
+
+
+
