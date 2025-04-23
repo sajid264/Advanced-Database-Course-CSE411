@@ -40,7 +40,7 @@ create type LineItemList_ntabtyp as table of LineItem_objtyp;
 
 CREATE or replace TYPE PurchaseOrder_objtyp AUTHID CURRENT_USER AS OBJECT (
     PONo number,
-    CustRef Ref Customer_objtyp,
+    Cust_Ref Ref Customer_objtyp,
     OrderDate date,
     ShipDate DATE,
     LineItemList_ntab LineItemList_ntabtyp,
@@ -53,19 +53,6 @@ CREATE or replace TYPE PurchaseOrder_objtyp AUTHID CURRENT_USER AS OBJECT (
         sumLineItems RETURN NUMBER
     );
 /
-
--- CREATE OR REPLACE TYPE BODY PURCHASEORDER_OBJTYP as
---     map member function getPONo return number is 
---     BEGIN
---         RETURN PONo;
---     END;
-
---     member function sumLineItems return number is 
---         i integer;
---         StockVal StockItem_objtyp;
---         Total NUMBER : = 0;
-
---     begin
 
 CREATE OR REPLACE TYPE BODY PURCHASEORDER_OBJTYP AS
     MAP MEMBER FUNCTION getPONo return number is 
@@ -109,7 +96,7 @@ CREATE TABLE Stock_objtab OF StockItem_objtyp (StockNo PRIMARY KEY)
     OBJECT IDENTIFIER IS PRIMARY KEY;
 
 CREATE TABLE PurchaseOrder_objtab OF PurchaseOrder_objtyp 
-(PRIMARY KEY (PONo), FOREIGN KEY (Custref) REFERENCES Customer_objtyp)  
+(PRIMARY KEY (PONo), FOREIGN KEY (Cust_ref) REFERENCES Customer_objtab)  
 OBJECT IDENTIFIER IS PRIMARY KEY
 NESTED TABLE LineItemList_ntab STORE AS PoLine_ntab (
     (PRIMARY KEY (NESTED_TABLE_ID, LineItemNo))
@@ -120,3 +107,65 @@ RETURN AS LOCATOR
 
 
 
+-- Data
+
+
+INSERT INTO Customer_objtab VALUES (
+  Customer_objtyp(
+    1,
+    'Abdullah',
+    Address_objtyp('123 Main St','Dhaka','Dhaka','1207'),
+    PhoneList_vartyp('01511200215')
+  )
+);
+INSERT INTO Customer_objtab VALUES (
+  Customer_objtyp(
+    2,
+    'Borkot',
+    Address_objtyp('456 Oak Ave','Chittagong','Chittagong','4000'),
+    PhoneList_vartyp('01511200215')
+  )
+);
+INSERT INTO Customer_objtab VALUES (
+  Customer_objtyp(
+    3,
+    'Akib',
+    Address_objtyp('456 Oak Ave','Chittagong','Chittagong','4000'),
+    PhoneList_vartyp('01511200215')
+  )
+);
+INSERT INTO Customer_objtab VALUES (
+  Customer_objtyp(
+    4,
+    'Amor',
+    Address_objtyp('123 Main St','Dhaka','Dhaka','1207'),
+    PhoneList_vartyp('01511200215')
+  )
+);
+INSERT INTO Customer_objtab VALUES (
+  Customer_objtyp(
+    5,
+    'Bilal',
+    Address_objtyp('456 Oak Ave','Chittagong','Chittagong','4000'),
+    PhoneList_vartyp('01511200215')
+  )
+);
+INSERT INTO Customer_objtab VALUES (
+  Customer_objtyp(
+    6,
+    'Akbor',
+    Address_objtyp('456 Oak Ave','Chittagong','Chittagong','4000'),
+    PhoneList_vartyp('01511200215')
+  )
+);
+COMMIT;
+/
+
+
+INSERT INTO Stock_objtab VALUES(1004, 6750.00, 2) ;
+INSERT INTO Stock_objtab VALUES(1011, 4500.23, 2) ;
+INSERT INTO Stock_objtab VALUES(1534, 2234.00, 2) ;
+INSERT INTO Stock_objtab VALUES(1535, 3456.23, 2) ;
+
+COMMIT;
+/
