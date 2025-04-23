@@ -25,17 +25,6 @@ create type Address_objtyp as object (
 );
 /
 
--- CREATE TYPE Customer_objtyp AS OBJECT (
---   CustNo           NUMBER,
---   CustName         VARCHAR2(200),
---   Address_obj      Address_objtyp,
---   PhoneList_var    PhoneList_vartyp,
-
---   ORDER MEMBER FUNCTION
---     compareCustOrders(x IN Customer_objtyp) RETURN INTEGER
--- ) NOT FINAL;
--- /
-
 create OR REPLACE type customer_objtyp as object (
     CustNo number,
     CustName varchar2(52),
@@ -45,6 +34,7 @@ create OR REPLACE type customer_objtyp as object (
         compareCustOrders(x in Customer_objtyp) return integer
 ) not final ;
 /
+
 create type LineItemList_ntabtyp as table of LineItem_objtyp;
 /
 
