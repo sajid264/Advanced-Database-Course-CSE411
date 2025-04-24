@@ -104,8 +104,8 @@ NESTED TABLE LineItemList_ntab STORE AS PoLine_ntab (
 RETURN AS LOCATOR
 /
 
-
-
+ALTER TABLE POLINE_NTAB 
+  ADD (SCOPE FOR (STOCK_REF) IS STOCK_OBJTAB);
 
 -- Data
 
@@ -169,3 +169,24 @@ INSERT INTO Stock_objtab VALUES(1535, 3456.23, 2) ;
 
 COMMIT;
 /
+
+insert into purchaseorder_objtab 
+  select 1001, ref(c), sysdate, '10-mar-2023', lineItemList_ntabtyp(),
+  null
+  from customer_objtab c
+  where c.CUSTNO =1;
+
+commit;
+/
+insert into PurchaseOrder_objtab
+  select 1002, REF(c), sysdate, '12-may-2025', lineItemList_ntabtyp(), 
+         Address_objtyp('789 Elm St', 'Sylhet', 'Sylhet', '3100')
+  from customer_objtab c where c.custNo=1;
+
+
+
+SELECT * FROM ALL_PROCEDURES 
+WHERE OBJECT_TYPE='PACKAGE' AND OBJECT_NAME LIKE 'UTL_REF%';
+
+
+delete from purchaseOrder_objtab;
