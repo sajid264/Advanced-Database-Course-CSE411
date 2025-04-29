@@ -11,12 +11,8 @@ CREATE TYPE LineItem_objtyp AS OBJECT (
     Discount    Number
 );
 /
-
-
 CREATE or replace type PhoneList_vartyp as VARRAY(10) of VARCHAR2(20);
 /
-
-
 create type Address_objtyp as object (
     Street VARCHAR2(52),
     City   VARCHAR2(52),
@@ -24,7 +20,6 @@ create type Address_objtyp as object (
     Zip     VARCHAR2(20)
 );
 /
-
 create OR REPLACE type customer_objtyp as object (
     CustNo number,
     CustName varchar2(52),
@@ -96,11 +91,11 @@ CREATE TABLE Stock_objtab OF StockItem_objtyp (StockNo PRIMARY KEY)
     OBJECT IDENTIFIER IS PRIMARY KEY;
 
 CREATE TABLE PurchaseOrder_objtab OF PurchaseOrder_objtyp 
-(PRIMARY KEY (PONo), FOREIGN KEY (Cust_ref) REFERENCES Customer_objtab)  
-OBJECT IDENTIFIER IS PRIMARY KEY
-NESTED TABLE LineItemList_ntab STORE AS PoLine_ntab (
-    (PRIMARY KEY (NESTED_TABLE_ID, LineItemNo))
-    ORGANIZATION INDEX COMPRESS)
+  (PRIMARY KEY (PONo), FOREIGN KEY (Cust_ref) REFERENCES Customer_objtab)  
+  OBJECT IDENTIFIER IS PRIMARY KEY
+  NESTED TABLE LineItemList_ntab STORE AS PoLine_ntab (
+      (PRIMARY KEY (NESTED_TABLE_ID, LineItemNo))
+      ORGANIZATION INDEX COMPRESS)
 RETURN AS LOCATOR
 /
 
@@ -178,11 +173,23 @@ insert into purchaseorder_objtab
 
 commit;
 /
-insert into PurchaseOrder_objtab
-  select 1002, REF(c), sysdate, '12-may-2025', lineItemList_ntabtyp(), 
-         Address_objtyp('789 Elm St', 'Sylhet', 'Sylhet', '3100')
-  from customer_objtab c where c.custNo=1;
 
+INSERT INTO TABLE (
+  SELECT P.LINEITEMLIST_NTAB 
+  FROM PURCHASEORDER_OBJTAB P
+  WHERE P.PONO = 1001
+  )
+  SELECT 05, REF(S), 12, 0
+  FROM STOCK_OBJTAB S
+  WHERE S.STOCKNO = 1534;
+
+INSERT INTO TABLE
+  (SELECT P.LINEITEMLIST_NTAB
+  FROM PURCHASEORDER_OBJTAB P
+  WHERE P.PONO = 1001)
+  SELECT 04, REF(S), 12, 0
+  FROM STOCK_OBJTAB S
+  WHERE S.STOCKNO = 1534;
 
 
 SELECT * FROM ALL_PROCEDURES 
