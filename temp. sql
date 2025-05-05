@@ -23,3 +23,48 @@ BEGIN
 
 END;
 /
+
+create type address_objtyp;
+
+create or replace type address_objtyp as object(
+    house varchar2(48),
+    thana varchar2(48),
+    district varchar2(48),
+    division varchar2(48)
+);
+
+drop type address_objtyp;
+
+create table address_list of address_objtyp;
+
+insert into address_list VALUES('a','b','c','d');
+
+create type kids_birthcert as varray(3) of number;
+
+
+create type phone_list as varray(5) of varchar2(16);
+
+create table sad (
+    id int,
+    mobiles phone_list,
+    address address_objtyp
+);
+
+alter table sad
+add (CONSTRAINT pk primary key  (id),
+    constraint house check(address.house is not null) 
+    );
+
+drop table sad;
+
+insert into sad values(1, phone_list('01511200215'));
+insert into sad values(2, phone_list('01511200215','01522203256'));
+insert into sad values(3, phone_list('01511200215','01352162589'));
+insert into sad values(4, phone_list('01511200215','01452652365'));
+insert into sad values(5, phone_list('01511200215','01754525263'));
+insert into sad values(6, phone_list('01511200215','01652525254','01856524879'));
+
+SELECT * from sad;
+
+
+
